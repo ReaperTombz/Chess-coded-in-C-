@@ -1,0 +1,87 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+const int ROWS = 8;
+const int COLUMNS = 8;
+
+char board[ROWS][COLUMNS];
+
+void initBoard() {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLUMNS; j++) {
+            board[i][j] = ' ';
+        }
+    }
+
+    // Initialize the pawns
+    for (int i = 0; i < COLUMNS; i++) {
+        board[1][i] = 'P';
+        board[6][i] = 'P';
+    }
+
+    // Initialize the rooks
+    board[0][0] = 'R';
+    board[0][7] = 'R';
+    board[7][0] = 'R';
+    board[7][7] = 'R';
+
+    // Initialize the knights
+    board[0][1] = 'N';
+    board[0][6] = 'N';
+    board[7][1] = 'N';
+    board[7][6] = 'N';
+
+    // Initialize the bishops
+    board[0][2] = 'B';
+    board[0][5] = 'B';
+    board[7][2] = 'B';
+    board[7][5] = 'B';
+
+    // Initialize the queen
+    board[0][3] = 'Q';
+    board[7][3] = 'Q';
+
+    // Initialize the king
+    board[0][4] = 'K';
+    board[7][4] = 'K';
+}
+
+void displayBoard() {
+    cout << "  A B C D E F G H" << endl;
+    for (int i = 0; i < ROWS; i++) {
+        cout << i + 1 << " ";
+        for (int j = 0; j < COLUMNS; j++) {
+            cout << board[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+bool movePiece(int fromRow, int fromColumn, int toRow, int toColumn) {
+    if (fromRow < 0 || fromRow >= ROWS || fromColumn < 0 || fromColumn >= COLUMNS || toRow < 0 || toRow >= ROWS || toColumn < 0 || toColumn >= COLUMNS) {
+        cout << "Invalid move, try again." << endl;
+        return false;
+    }
+    if (board[fromRow][fromColumn] == ' ') {
+        cout << "There is no piece to move, try again." << endl;
+        return false;
+    }
+    if (board[toRow][toColumn] != ' ') {
+        cout << "There is already a piece at that location, try again." << endl;
+        return false;
+    }
+
+    board[toRow][toColumn] = board[fromRow][fromColumn];
+    board[fromRow][fromColumn] = ' ';
+    return true;
+}
+
+iint main() {
+    initBoard();
+    displayBoard();
+
+    while (true)
+    
